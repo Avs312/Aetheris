@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetheris — Weather & Forecast</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/phase1-2.css">
+
+    <!-- Chart.js & jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="severity-orange">
+
+    <canvas id="heatShimmerCanvas"></canvas>
+
+    <!-- Top Alert Banner -->
+    <div id="topSeverityBanner" class="top-alert-bar">
+        <div class="banner-content">
+            <span class="pulse-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <strong id="bannerSeverityTitle">Severe Heatwave Alert (Orange Level):</strong>
+            <span id="bannerSeverityDesc">Real-feel temperatures reach 48.5°C in Vidarbha and West Rajasthan. Stay hydrated and avoid outdoor activity from 11 AM to 4 PM.</span>
+        </div>
+        <div class="banner-actions">
+            <button id="btnListenBanner" class="btn-banner-audio" title="Listen Alert Aloud">
+                <i class="fa-solid fa-volume-high"></i> Listen
+            </button>
+            <button class="btn-banner-close" onclick="$('#topSeverityBanner').slideUp();" title="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-box">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Aetheris</h1>
+                    <p class="subtitle">Heatwave Warning & Public Safety Portal</p>
+                </div>
+            </a>
+
+            <!-- Status Pill & Simulator -->
+            <div class="header-status-box">
+                <div class="severity-pill" id="currentSeverityPill">
+                    <span class="status-dot"></span>
+                    <span class="severity-label" id="severityPillLabel">Alert (Orange)</span>
+                    <span class="temp-badge" id="pillTempBadge">42.8°C (Feels 48.5°C)</span>
+                </div>
+
+                <div class="sim-controls">
+                    <label for="severitySimSelect">Status:</label>
+                    <select id="severitySimSelect" class="form-select-sm">
+                        <option value="green">Green (Normal)</option>
+                        <option value="yellow">Yellow (Watch)</option>
+                        <option value="orange" selected>Orange (Alert)</option>
+                        <option value="red">Red (Warning)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Accessibility & Actions -->
+            <div class="header-actions">
+                <div class="lang-audio-controls">
+                    <select id="appLangSelect" class="form-select-sm" title="Select Voice & Text Language">
+                        <option value="en-US">English</option>
+                        <option value="hi-IN">हिन्दी (Hindi)</option>
+                        <option value="mr-IN">मराठी (Marathi)</option>
+                    </select>
+                    <button id="btnToggleAudioFeedback" class="btn-icon active" title="Toggle Sound Feedback">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <button id="btnStopSpeech" class="btn-icon btn-danger-soft hidden" title="Stop Reading">
+                        <i class="fa-solid fa-circle-stop"></i>
+                    </button>
+                </div>
+
+                <a href="../dev 3/emergency-sos.html" class="btn-sos-trigger">
+                    <i class="fa-solid fa-phone"></i> Emergency Help
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="phase-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-house"></i> Overview
+            </a>
+            <a href="phase1-2.html" class="nav-link active">
+                <i class="fa-solid fa-cloud-sun"></i> Weather & Forecast
+            </a>
+            <a href="../dev 2/phase3-4.html" class="nav-link">
+                <i class="fa-solid fa-tower-broadcast"></i> Live Stations
+            </a>
+            <a href="../dev 3/phase5-advisory.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i> Safety Guides
+            </a>
+            <a href="../dev 3/emergency-sos.html" class="nav-link">
+                <i class="fa-solid fa-truck-medical"></i> Emergency Help
+            </a>
+            <a href="../dev 3/community.html" class="nav-link">
+                <i class="fa-solid fa-users"></i> Community & Contacts
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-body">
+
+        <!-- ==================== PAST WEATHER RECORDS ==================== -->
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3><i class="fa-solid fa-database"></i> Past Weather Records & Observations</h3>
+                    <p class="section-desc">Official weather measurements, normal temperature averages, and data quality checks.</p>
+                </div>
+                <button id="btnRunPipeline" class="btn btn-outline-primary btn-sm">
+                    <i class="fa-solid fa-rotate"></i> Re-Check Data Quality
+                </button>
+            </div>
+
+            <!-- Quality Check Status Badges -->
+            <div class="pipeline-status-container">
+                <div class="pipeline-step">
+                    <div class="pipeline-icon"><i class="fa-solid fa-broom"></i></div>
+                    <div class="pipeline-info">
+                        <span class="step-title">1. Cleaning & Error Checks</span>
+                        <span class="step-detail" id="pipeCleanStatus">Checked for faulty sensor errors (Passed)</span>
+                    </div>
+                    <span class="badge badge-success">OK</span>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div class="pipeline-info">
+                        <span class="step-title">2. Standard 30-Year Norm</span>
+                        <span class="step-detail" id="pipeNormStatus">Compared with 1991–2020 normal averages</span>
+                    </div>
+                    <span class="badge badge-success">Calibrated</span>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-icon"><i class="fa-solid fa-shield-check"></i></div>
+                    <div class="pipeline-info">
+                        <span class="step-title">3. Neighbor Sensor Verification</span>
+                        <span class="step-detail" id="pipeQCStatus">Cross-verified with nearby stations (99.4%)</span>
+                    </div>
+                    <span class="badge badge-success">Verified</span>
+                </div>
+            </div>
+
+            <!-- Filter Toolbar & Table -->
+            <div class="table-controls">
+                <div class="filter-group">
+                    <input type="text" id="imdSearchInput" class="form-control" placeholder="Search city or station name...">
+                    <select id="imdYearFilter" class="form-select">
+                        <option value="all">All Years (2020-2026)</option>
+                        <option value="2026" selected>2026 (Current Season)</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+                    <select id="imdSeverityFilter" class="form-select">
+                        <option value="all">All Warning Levels</option>
+                        <option value="Severe Heatwave">Severe Heatwave</option>
+                        <option value="Heatwave">Heatwave</option>
+                        <option value="Normal">Normal</option>
+                    </select>
+                </div>
+                <button id="btnExportIMDData" class="btn btn-secondary-soft btn-sm">
+                    <i class="fa-solid fa-download"></i> Download CSV
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table" id="imdDataTable">
+                    <thead>
+                        <tr>
+                            <th>Station / City</th>
+                            <th>Date</th>
+                            <th>Max Temp (°C)</th>
+                            <th>Normal Temp (°C)</th>
+                            <th>Difference (°C)</th>
+                            <th>Humidity (%)</th>
+                            <th>Feels Like (°C)</th>
+                            <th>Official Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="imdTableBody">
+                        <!-- Populated by js/phase1-2.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==================== CRITERIA CHECKER & RISK CALCULATOR ==================== -->
+        <div class="grid-2col">
+            <!-- Heatwave Checker Widget -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-calculator"></i> Heatwave Level Checker</h3>
+                    <span class="badge badge-primary">IMD Standard</span>
+                </div>
+                <div class="checker-form">
+                    <div class="form-group">
+                        <label>Terrain Type:</label>
+                        <select id="chkTerrain" class="form-select">
+                            <option value="plains">Plains & Inland (Threshold: 40°C)</option>
+                            <option value="coastal">Coastal Region (Threshold: 37°C)</option>
+                            <option value="hills">Hills & Mountains (Threshold: 30°C)</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Normal Average Temp (°C):</label>
+                            <input type="number" id="chkNormalTemp" class="form-control" value="40.0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Expected / Current Temp (°C):</label>
+                            <input type="number" id="chkObservedTemp" class="form-control" value="46.2" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="checker-result-box" id="checkerResultBox">
+                        <div class="result-header">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <h4 id="chkResultTitle">Severe Heatwave Condition</h4>
+                        </div>
+                        <p id="chkResultDesc">Temperature is <strong>+6.2°C</strong> above normal.</p>
+                        <div class="result-badge-container">
+                            <span class="badge badge-danger" id="chkActionBadge">Warning: Red Alert Issued</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heat & Humidity Risk Calculator -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-sliders"></i> Heat & Humidity Risk Calculator</h3>
+                    <button id="btnTTSWBGT" class="btn-icon" title="Listen to Risk">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                </div>
+                <div class="calc-sliders">
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Air Temperature:</span>
+                            <strong id="valCalcTemp">42 °C</strong>
+                        </div>
+                        <input type="range" id="sliderCalcTemp" min="25" max="52" value="42" step="0.5">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Humidity:</span>
+                            <strong id="valCalcHumidity">45 %</strong>
+                        </div>
+                        <input type="range" id="sliderCalcHumidity" min="10" max="95" value="45" step="1">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Wind Speed:</span>
+                            <strong id="valCalcWind">12 km/h</strong>
+                        </div>
+                        <input type="range" id="sliderCalcWind" min="0" max="40" value="12" step="1">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>Sunlight (Solar Radiation):</span>
+                            <strong id="valCalcSolar">850 W/m²</strong>
+                        </div>
+                        <input type="range" id="sliderCalcSolar" min="200" max="1200" value="850" step="10">
+                    </div>
+                </div>
+
+                <div class="calc-output-display">
+                    <div class="output-item">
+                        <span class="label">Feels Like</span>
+                        <span class="val text-danger" id="outHeatIndex">49.4 °C</span>
+                    </div>
+                    <div class="output-divider"></div>
+                    <div class="output-item">
+                        <span class="label">Heat Stress (WBGT)</span>
+                        <span class="val text-warning" id="outWBGT">32.1 °C</span>
+                    </div>
+                    <div class="output-divider"></div>
+                    <div class="output-item">
+                        <span class="label">Health Risk</span>
+                        <span class="badge badge-danger" id="outRiskLevel">High Danger</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p><strong>Aetheris</strong> — Weather & Forecast Module © 2026.</p>
+            <p class="footer-sub">Built with HTML5, CSS3, JavaScript (ES6+), and jQuery.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/global.js"></script>
+    <script src="js/phase1-2.js"></script>
+</body>
+</html>
