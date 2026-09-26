@@ -1,0 +1,230 @@
+/* ===================================================================
+   AETHERIS - PHASE V STYLESHEET (css/phase5.css)
+   Clean, Human-Centered, Professional Light Theme
+   =================================================================== */
+
+/* Persona Selector Tabs */
+.persona-tab-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.persona-tab-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.persona-tab {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 13.5px;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+}
+
+.persona-tab:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+}
+
+.persona-tab.active {
+    background: var(--theme-subtle-bg);
+    color: var(--theme-primary);
+    border-color: var(--theme-border);
+    font-weight: 700;
+}
+
+/* Advisory Display Box */
+.advisory-display-box {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    position: relative;
+}
+
+.advisory-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.persona-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.persona-badge {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 13.5px;
+    color: var(--theme-primary);
+}
+
+.severity-tag {
+    font-size: 11.5px;
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+}
+
+.advisory-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.advisory-section {
+    margin-bottom: 14px;
+}
+
+.advisory-section h5 {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.advisory-section h5 i {
+    color: var(--theme-primary);
+}
+
+.advisory-section ul {
+    padding-left: 20px;
+    color: var(--text-secondary);
+}
+
+.advisory-section li {
+    margin-bottom: 4px;
+}
+
+.speaking-pulse {
+    color: #16a34a !important;
+}
+
+/* Accordion Components */
+.accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.accordion-item {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.accordion-item.active {
+    border-color: var(--theme-border);
+}
+
+.accordion-header {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: #ffffff;
+    user-select: none;
+}
+
+.accordion-header h4 {
+    font-family: var(--font-heading);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accordion-header h4 i {
+    color: var(--theme-primary);
+}
+
+.accordion-icon {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.25s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+    color: var(--theme-primary);
+}
+
+.accordion-body {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-item.active .accordion-body {
+    padding: 12px 18px 18px 18px;
+    max-height: 500px;
+    background: #f8fafc;
+    border-top: 1px solid var(--border-color);
+}
+
+.precaution-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.precaution-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+}
+
+.precaution-checklist input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--theme-primary);
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.precaution-checklist label {
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.precaution-checklist strong {
+    color: var(--text-primary);
+}

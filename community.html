@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetheris — Community Updates & Helplines</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/emergency-community.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="severity-orange">
+
+    <canvas id="heatShimmerCanvas"></canvas>
+
+    <!-- Top Alert Banner -->
+    <div id="topSeverityBanner" class="top-alert-bar">
+        <div class="banner-content">
+            <span class="pulse-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <strong id="bannerSeverityTitle">Severe Heatwave Alert (Orange Level):</strong>
+            <span id="bannerSeverityDesc">Real-feel temperatures reach 48.5°C in Vidarbha and West Rajasthan. Stay hydrated and avoid outdoor activity from 11 AM to 4 PM.</span>
+        </div>
+        <div class="banner-actions">
+            <button id="btnListenBanner" class="btn-banner-audio" title="Listen Alert Aloud">
+                <i class="fa-solid fa-volume-high"></i> Listen
+            </button>
+            <button class="btn-banner-close" onclick="$('#topSeverityBanner').slideUp();" title="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../dev 1/index.html" class="brand-box">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Aetheris</h1>
+                    <p class="subtitle">Heatwave Warning & Public Safety Portal</p>
+                </div>
+            </a>
+
+            <!-- Status Pill & Simulator -->
+            <div class="header-status-box">
+                <div class="severity-pill" id="currentSeverityPill">
+                    <span class="status-dot"></span>
+                    <span class="severity-label" id="severityPillLabel">Alert (Orange)</span>
+                    <span class="temp-badge" id="pillTempBadge">42.8°C (Feels 48.5°C)</span>
+                </div>
+
+                <div class="sim-controls">
+                    <label for="severitySimSelect">Status:</label>
+                    <select id="severitySimSelect" class="form-select-sm">
+                        <option value="green">Green (Normal)</option>
+                        <option value="yellow">Yellow (Watch)</option>
+                        <option value="orange" selected>Orange (Alert)</option>
+                        <option value="red">Red (Warning)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Accessibility & Actions -->
+            <div class="header-actions">
+                <div class="lang-audio-controls">
+                    <select id="appLangSelect" class="form-select-sm" title="Select Voice & Text Language">
+                        <option value="en-US">English</option>
+                        <option value="hi-IN">हिन्दी (Hindi)</option>
+                        <option value="mr-IN">मराठी (Marathi)</option>
+                    </select>
+                    <button id="btnToggleAudioFeedback" class="btn-icon active" title="Toggle Sound Feedback">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                    <button id="btnStopSpeech" class="btn-icon btn-danger-soft hidden" title="Stop Reading">
+                        <i class="fa-solid fa-circle-stop"></i>
+                    </button>
+                </div>
+
+                <a href="emergency-sos.html" class="btn-sos-trigger">
+                    <i class="fa-solid fa-phone"></i> Emergency Help
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="phase-navbar">
+        <div class="nav-container">
+            <a href="../dev 1/index.html" class="nav-link">
+                <i class="fa-solid fa-house"></i> Overview
+            </a>
+            <a href="../dev 1/phase1-2.html" class="nav-link">
+                <i class="fa-solid fa-cloud-sun"></i> Weather & Forecast
+            </a>
+            <a href="../dev 2/phase3-4.html" class="nav-link">
+                <i class="fa-solid fa-tower-broadcast"></i> Live Stations
+            </a>
+            <a href="phase5-advisory.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i> Safety Guides
+            </a>
+            <a href="emergency-sos.html" class="nav-link">
+                <i class="fa-solid fa-truck-medical"></i> Emergency Help
+            </a>
+            <a href="community.html" class="nav-link active">
+                <i class="fa-solid fa-users"></i> Community & Contacts
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-body">
+        <div class="grid-2col">
+            <!-- ==================== HELPLINES & COOLING CENTERS ==================== -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3><i class="fa-solid fa-address-book"></i> Helplines & Free Cooling Centers</h3>
+                        <p class="section-desc">Search for rescue teams, hospitals, and free public air-cooled shelters.</p>
+                    </div>
+                    <span class="badge badge-primary">24/7 Available</span>
+                </div>
+
+                <div class="directory-search">
+                    <input type="text" id="dirSearchInput" class="form-control" placeholder="Search by name, hospital, or city...">
+                </div>
+
+                <div class="directory-list" id="directoryList">
+                    <!-- Injected by js/community.js -->
+                </div>
+            </div>
+
+            <!-- ==================== REPORT ISSUE & BULLETIN ==================== -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3><i class="fa-solid fa-bullhorn"></i> Report a Local Issue</h3>
+                        <p class="section-desc">Let local relief teams know if your neighborhood needs water, shade, or power fixes.</p>
+                    </div>
+                    <span class="badge badge-info">Community Help</span>
+                </div>
+
+                <form id="communityReportForm" class="report-form">
+                    <div class="form-group">
+                        <label>Your Name (or leave blank to stay anonymous):</label>
+                        <input type="text" id="rptName" class="form-control" placeholder="e.g. Rajesh Sharma">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>What is needed?</label>
+                            <select id="rptCategory" class="form-select" required>
+                                <option value="Water Tanker Needed">Water Tanker Request</option>
+                                <option value="Power Outage">Power Cut / Cooler Failure</option>
+                                <option value="Heat Illness Observed">Someone Affected by Heat</option>
+                                <option value="Shade Setup Request">Need Shade / Shelter Tent</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Area / Landmark:</label>
+                            <input type="text" id="rptLocation" class="form-control" placeholder="e.g. Near Bus Stand, Sector 4" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Details:</label>
+                        <textarea id="rptDetails" class="form-control" rows="2" placeholder="Briefly describe the situation..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Report
+                    </button>
+                </form>
+
+                <h4 class="mt-4 mb-2" style="font-family: var(--font-heading); font-size: 14.5px; color: var(--text-primary);">
+                    <i class="fa-solid fa-list-check" style="color: var(--theme-primary);"></i> Recent Community Updates
+                </h4>
+                <div class="bulletin-feed" id="bulletinFeed">
+                    <!-- Injected by js/community.js -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p><strong>Aetheris</strong> — Community & Relief Directory © 2026.</p>
+            <p class="footer-sub">Developer 3 Module: Pure HTML5, CSS3, JavaScript (ES6+), jQuery.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/global.js"></script>
+    <script src="js/community.js"></script>
+</body>
+</html>
