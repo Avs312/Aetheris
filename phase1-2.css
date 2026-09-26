@@ -1,0 +1,286 @@
+/* ===================================================================
+   AETHERIS - PHASE I & II STYLESHEET (css/phase1-2.css)
+   Clean, Human-Centered, Professional Light Theme
+   =================================================================== */
+
+/* Data Quality Checks Cards */
+.pipeline-status-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.pipeline-step {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: var(--transition-smooth);
+}
+
+.pipeline-step:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-sm);
+}
+
+.pipeline-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: var(--theme-subtle-bg);
+    color: var(--theme-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.pipeline-info {
+    flex: 1;
+}
+
+.step-title {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.step-detail {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Table Controls & Data Table */
+.table-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.filter-group input {
+    max-width: 260px;
+}
+
+.filter-group select {
+    max-width: 180px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    text-align: left;
+}
+
+.data-table thead {
+    background: #f8fafc;
+}
+
+.data-table th {
+    padding: 10px 14px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.data-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.departure-pos {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.departure-norm {
+    color: #16a34a;
+}
+
+/* Criteria Checker Form */
+.checker-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.checker-result-box {
+    background: var(--theme-subtle-bg);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 4px;
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.result-header i {
+    font-size: 18px;
+    color: var(--theme-primary);
+}
+
+.result-header h4 {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--theme-primary);
+}
+
+#chkResultDesc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+/* Sliders & Risk Calculator */
+.calc-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.slider-group {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+}
+
+.slider-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.slider-label strong {
+    color: var(--text-primary);
+    font-size: 13.5px;
+}
+
+
+input[type="range"] {
+   -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--theme-primary);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.calc-output-display {
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 12px;
+    text-align: center;
+}
+
+.output-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.output-item .label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.output-item .val {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.output-divider {
+    width: 1px;
+    height: 35px;
+    background: var(--border-color);
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+@media (max-width: 768px) {
+    .pipeline-status-container {
+        grid-template-columns: 1fr;
+    }
+    .calc-output-display {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .output-divider {
+        display: none;
+    }
+    .filter-group input, .filter-group select {
+        max-width: 100%;
+        width: 100%;
+    }
+}
