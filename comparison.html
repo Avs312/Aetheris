@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aetheris | Forecast Comparison & Accuracy</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top System Notice Bar -->
+  <div class="top-notice">
+    <div class="container notice-flex">
+      <div><span class="pulse-dot"></span><strong>LIVE STATUS:</strong> Model Validation & Observational Verification</div>
+      <div style="font-family: var(--font-mono);">Regional Atmospheric Surveillance Network • Operational Advisory</div>
+    </div>
+  </div>
+
+  <!-- Shared Global Navigation -->
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a href="index.html" class="brand">AETHERIS<span>•</span></a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰ Menu</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="forecasts.html">Forecasts</a></li>
+        <li><a href="monitoring.html">Monitoring</a></li>
+        <li><a href="comparison.html" class="active">Comparison</a></li>
+        <li><a href="safety.html">Safety Guide</a></li>
+        <li><a href="emergency.html">Emergency</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="py-3" style="border-bottom: 1px solid var(--border); background: var(--surface-alt);">
+    <div class="container">
+      <span class="mono-tag">NUMERICAL VERIFICATION</span>
+      <h1>Forecast Comparison & Accuracy Analysis</h1>
+      <p>Benchmarking predicted atmospheric model temperatures against actual ground station observations.</p>
+    </div>
+  </section>
+
+  <!-- 1. Accuracy Summary Card & Plain English Explanation -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="grid-2" style="align-items: center;">
+        <div>
+          <span class="mono-tag">MODEL ASSESSMENT SUMMARY</span>
+          <h2>Numerical Model Performance</h2>
+          <p style="margin-bottom: 1rem;">
+            <strong>High operational confidence achieved.</strong> Across our weekly benchmark cycle, the numerical heat model achieved an average variance of only <strong>±0.4°C</strong> against actual calibrated ground thermometers.
+          </p>
+          <p>
+            In meteorological forecasting, a variance within ±1.0°C is considered an exceptional standard for issuing life-saving municipal heat advisories before extreme spikes occur.
+          </p>
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <div class="card card-highlight" style="padding: 1rem; flex: 1;">
+              <span class="mono-tag">MEAN ABSOLUTE ERROR</span>
+              <div style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--terracotta);">0.39°C</div>
+              <small>Optimal margin</small>
+            </div>
+            <div class="card card-highlight" style="padding: 1rem; flex: 1;">
+              <span class="mono-tag">ACCURACY SCORE</span>
+              <div style="font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--olive);">94.8%</div>
+              <small>Tolerance &lt; 0.8°C</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="mono-tag">ANALYSIS GUIDE</span>
+          <h3>Why Forecasts Differ from Ground Reality</h3>
+          <p style="font-size: 0.92rem; margin-bottom: 1rem;">
+            Computer models calculate atmospheric conditions in wide 5-kilometer grid boxes. Ground-level thermometers, however, measure real street-level air influenced by microclimates.
+          </p>
+          <ul style="padding-left: 1.2rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+            <li><strong>Asphalt Absorption:</strong> Heavy roads retain solar energy, raising ground temperatures slightly above open-field models.</li>
+            <li><strong>Localized Gusts:</strong> Sudden afternoon wind changes can disperse heat faster than standard grids predict.</li>
+            <li><strong>Vegetation Canopy:</strong> Tree-shaded avenues can record 1°C lower than surrounding concrete zones.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Side-by-Side Visual Comparison using Pure CSS Bars -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <span class="mono-tag">VISUAL COMPARISON (CSS DUAL BARS)</span>
+      <h2>Predicted Model vs. Ground Observed</h2>
+      <p style="margin-bottom: 2rem;">Compare the numerical model (orange bar) against the ground thermometer (charcoal bar).</p>
+
+      <div class="grid-2">
+        <!-- Day 1 -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <strong>Monday (Station Alpha)</strong>
+            <span class="badge badge-green">Delta: +0.2°C</span>
+          </div>
+          <div class="dual-bar-wrap">
+            <div class="dual-bar-line">
+              <span style="color: var(--terracotta); font-weight: 600;">Predicted</span>
+              <div class="track-pred"><div class="fill-pred" style="width: 82%;"></div></div>
+              <span>41.0°C</span>
+            </div>
+            <div class="dual-bar-line">
+              <span style="color: var(--charcoal); font-weight: 600;">Observed</span>
+              <div class="track-pred"><div class="fill-obs" style="width: 83%;"></div></div>
+              <span>41.2°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <strong>Tuesday (Station Alpha)</strong>
+            <span class="badge badge-green">Delta: -0.3°C</span>
+          </div>
+          <div class="dual-bar-wrap">
+            <div class="dual-bar-line">
+              <span style="color: var(--terracotta); font-weight: 600;">Predicted</span>
+              <div class="track-pred"><div class="fill-pred" style="width: 86%;"></div></div>
+              <span>43.1°C</span>
+            </div>
+            <div class="dual-bar-line">
+              <span style="color: var(--charcoal); font-weight: 600;">Observed</span>
+              <div class="track-pred"><div class="fill-obs" style="width: 85%;"></div></div>
+              <span>42.8°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <strong>Wednesday (Station Beta)</strong>
+            <span class="badge badge-green">Delta: +0.5°C</span>
+          </div>
+          <div class="dual-bar-wrap">
+            <div class="dual-bar-line">
+              <span style="color: var(--terracotta); font-weight: 600;">Predicted</span>
+              <div class="track-pred"><div class="fill-pred" style="width: 87%;"></div></div>
+              <span>43.0°C</span>
+            </div>
+            <div class="dual-bar-line">
+              <span style="color: var(--charcoal); font-weight: 600;">Observed</span>
+              <div class="track-pred"><div class="fill-obs" style="width: 89%;"></div></div>
+              <span>43.5°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <strong>Thursday (Station Beta)</strong>
+            <span class="badge badge-yellow">Delta: +0.7°C</span>
+          </div>
+          <div class="dual-bar-wrap">
+            <div class="dual-bar-line">
+              <span style="color: var(--terracotta); font-weight: 600;">Predicted</span>
+              <div class="track-pred"><div class="fill-pred" style="width: 90%;"></div></div>
+              <span>43.9°C</span>
+            </div>
+            <div class="dual-bar-line">
+              <span style="color: var(--charcoal); font-weight: 600;">Observed</span>
+              <div class="track-pred"><div class="fill-obs" style="width: 94%;"></div></div>
+              <span>44.6°C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Comparison Table & Field Observations -->
+  <section class="py-5">
+    <div class="container">
+      <span class="mono-tag">DATA VERIFICATION TABLE</span>
+      <h2>Weekly Comparison Log</h2>
+      <p style="margin-bottom: 1.5rem;">Empirical records used to evaluate forecast precision across observation cycles.</p>
+
+      <div class="table-wrap" style="margin-bottom: 2.5rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date / Day</th>
+              <th>Station Reference</th>
+              <th>Model Predicted (°C)</th>
+              <th>Ground Observed (°C)</th>
+              <th>Variance (Δ)</th>
+              <th>Accuracy Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday</td>
+              <td>Node Alpha (Delhi)</td>
+              <td>41.0°C</td>
+              <td>41.2°C</td>
+              <td>+0.2°C</td>
+              <td><span class="badge badge-green">Within 0.5°C Margin</span></td>
+            </tr>
+            <tr>
+              <td>Tuesday</td>
+              <td>Node Alpha (Delhi)</td>
+              <td>43.1°C</td>
+              <td>42.8°C</td>
+              <td>-0.3°C</td>
+              <td><span class="badge badge-green">Within 0.5°C Margin</span></td>
+            </tr>
+            <tr>
+              <td>Wednesday</td>
+              <td>Node Beta (Nagpur)</td>
+              <td>43.0°C</td>
+              <td>43.5°C</td>
+              <td>+0.5°C</td>
+              <td><span class="badge badge-green">Within 0.5°C Margin</span></td>
+            </tr>
+            <tr>
+              <td>Thursday</td>
+              <td>Node Beta (Nagpur)</td>
+              <td>43.9°C</td>
+              <td>44.6°C</td>
+              <td>+0.7°C</td>
+              <td><span class="badge badge-yellow">Acceptable &lt;1.0°C</span></td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td>Node Gamma (Bikaner)</td>
+              <td>44.5°C</td>
+              <td>44.1°C</td>
+              <td>-0.4°C</td>
+              <td><span class="badge badge-green">Within 0.5°C Margin</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Field Observations -->
+      <span class="mono-tag">FIELD OBSERVATION NOTES</span>
+      <h2>Meteorologist Field Notes</h2>
+      <div class="grid-3" style="margin-top: 1rem;">
+        <div class="card card-highlight">
+          <small class="mono-tag">LOG NOTE #01</small>
+          <h4 style="margin: 0.3rem 0;">Early Solar Peak</h4>
+          <p style="font-size: 0.85rem;">Peak temperature arrived 40 minutes earlier than model expectation due to exceptionally calm surface winds at noon.</p>
+        </div>
+        <div class="card card-highlight">
+          <small class="mono-tag">LOG NOTE #02</small>
+          <h4 style="margin: 0.3rem 0;">Pavement Microclimate</h4>
+          <p style="font-size: 0.85rem;">Asphalt heat sink in central commercial corridor caused +0.7°C variance compared to open agricultural benchmark.</p>
+        </div>
+        <div class="card card-highlight">
+          <small class="mono-tag">LOG NOTE #03</small>
+          <h4 style="margin: 0.3rem 0;">Dry Air Mixing</h4>
+          <p style="font-size: 0.85rem;">Model successfully anticipated the late-afternoon drop as dry western winds dispersed boundary layer humidity.</p>
+        </div>
+      </div>
+
+      <!-- Navigation Step Bar -->
+      <div class="journey-bar">
+        <a href="monitoring.html" class="journey-link">
+          <span>Previous Module</span>
+          <strong>← Weather Station Monitoring</strong>
+        </a>
+        <a href="safety.html" class="journey-link" style="text-align: right;">
+          <span>Next Module</span>
+          <strong>Heatwave Safety Guide →</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Shared Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color: #FFF; margin-bottom: 0.75rem;">AETHERIS<span>•</span></div>
+          <p style="color: #A8A199; font-size: 0.88rem; max-width: 32ch;">
+            Regional early warnings, surface micro-telemetry, and public safety protocols during extreme thermal events.
+          </p>
+        </div>
+        <div>
+          <div class="footer-title">Weather Information</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Overview</a></li>
+            <li><a href="forecasts.html">City Forecasts</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Monitoring & Telemetry</div>
+          <ul class="footer-links">
+            <li><a href="monitoring.html">Station Telemetry</a></li>
+            <li><a href="comparison.html">Forecast Accuracy</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Safety & Community</div>
+          <ul class="footer-links">
+            <li><a href="safety.html">Safety Protocols</a></li>
+            <li><a href="emergency.html">Emergency Helplines</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-sub">
+        <div>© 2026 Aetheris Initiative • Regional Atmospheric Resilience Network</div>
+        <div style="font-family: var(--font-mono);">Public Meteorological Advisory System</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

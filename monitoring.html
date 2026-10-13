@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aetheris | Weather Station Monitoring</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top System Notice Bar -->
+  <div class="top-notice">
+    <div class="container notice-flex">
+      <div><span class="pulse-dot"></span><strong>LIVE STATUS:</strong> Automated Telemetry Feed Active</div>
+      <div style="font-family: var(--font-mono);">Regional Atmospheric Surveillance Network • Operational Advisory</div>
+    </div>
+  </div>
+
+  <!-- Shared Global Navigation -->
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a href="index.html" class="brand">AETHERIS<span>•</span></a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰ Menu</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="forecasts.html">Forecasts</a></li>
+        <li><a href="monitoring.html" class="active">Monitoring</a></li>
+        <li><a href="comparison.html">Comparison</a></li>
+        <li><a href="safety.html">Safety Guide</a></li>
+        <li><a href="emergency.html">Emergency</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="py-3" style="border-bottom: 1px solid var(--border); background: var(--surface-alt);">
+    <div class="container">
+      <span class="mono-tag">IN-SITU OBSERVATIONS</span>
+      <h1>Autonomous Weather Station Telemetry</h1>
+      <p>Continuous ground-level environmental sensing for microclimatic thermal detection.</p>
+    </div>
+  </section>
+
+  <!-- Weather Station Visual & Telemetry Controls -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="grid-2" style="align-items: center; margin-bottom: 3rem;">
+        <div>
+          <span class="mono-tag">AUTOMATED SURFACE OBSERVING SYSTEM</span>
+          <h2 id="stationTitle">Station Alpha — Ridge Observatory</h2>
+          <p id="stationLocation" style="font-weight: 500; color: var(--text); margin-bottom: 0.5rem;">
+            Northern Ridge, New Delhi (Elev. 248m • 28.6139° N, 77.2090° E)
+          </p>
+          <p style="margin-bottom: 1.5rem;">
+            Equipped with platinum resistance thermometers, sonic anemometers, and thermopile pyranometers inside a solar-radiation aspirated Stevenson screen.
+          </p>
+          
+          <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+            <div id="stationTime" style="font-family: var(--font-mono); font-size: 0.8rem; background: var(--surface-alt); padding: 0.5rem 0.8rem; border-radius: 4px; border: 1px solid var(--border);">
+              Live Telemetry: Today, 14:15:00 IST
+            </div>
+            <button class="btn btn-outline" style="font-size: 0.8rem; padding: 0.45rem 0.9rem;" onclick="refreshTimestamp()">
+              ↺ Refresh Telemetry
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div class="hero-img-wrap">
+            <img src="https://images.unsplash.com/photo-1590055531615-f16d36ffe8ec?auto=format&fit=crop&w=1000&q=80" alt="Meteorological weather station mast in arid field" class="hero-img" style="height: 300px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Selectable Station Tabs / List -->
+      <div style="margin-bottom: 1.5rem;">
+        <span class="mono-tag">SELECT MONITORING STATION NODE</span>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
+          <button class="btn btn-dark" onclick="switchStation('Station Alpha — Ridge Observatory', 'Northern Ridge, New Delhi (Elev. 248m)', '43.8°C', '26%', '19 km/h (WNW)', '960 W/m²')">
+            Station Alpha (New Delhi)
+          </button>
+          <button class="btn btn-outline" onclick="switchStation('Station Beta — Vidarbha Agro Node', 'Wardha Basin, Nagpur (Elev. 310m)', '45.2°C', '21%', '14 km/h (NW)', '1,015 W/m²')">
+            Station Beta (Nagpur)
+          </button>
+          <button class="btn btn-outline" onclick="switchStation('Station Gamma — Thar Desert Outpost', 'Kolayat Perimeter, Bikaner (Elev. 224m)', '46.1°C', '16%', '24 km/h (W)', '1,040 W/m²')">
+            Station Gamma (Bikaner)
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Core Sensor Cards -->
+      <div class="grid-4">
+        <!-- Sensor 1: Temperature -->
+        <div class="card card-highlight">
+          <span class="mono-tag">SENSOR 01 • AIR TEMP</span>
+          <div id="sensorTemp" style="font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: var(--terracotta);">43.8°C</div>
+          <p style="font-size: 0.82rem; margin-top: 0.35rem;">
+            Aspirated PT100 sensor mounted at 1.5m above unshaded turf.
+          </p>
+          <span class="badge badge-orange" style="margin-top: 0.5rem;">Severe Peak</span>
+        </div>
+
+        <!-- Sensor 2: Humidity -->
+        <div class="card card-highlight">
+          <span class="mono-tag">SENSOR 02 • HUMIDITY</span>
+          <div id="sensorHumidity" style="font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: var(--charcoal);">26%</div>
+          <p style="font-size: 0.82rem; margin-top: 0.35rem;">
+            Capacitive polymer hygrometer measuring relative atmospheric moisture.
+          </p>
+          <span class="badge badge-yellow" style="margin-top: 0.5rem;">Extremely Dry</span>
+        </div>
+
+        <!-- Sensor 3: Wind Speed -->
+        <div class="card card-highlight">
+          <span class="mono-tag">SENSOR 03 • WIND VELOCITY</span>
+          <div id="sensorWind" style="font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: var(--charcoal);">19 km/h (WNW)</div>
+          <p style="font-size: 0.82rem; margin-top: 0.35rem;">
+            Ultrasonic 3D anemometer logging hot continental advection gusts.
+          </p>
+          <span class="badge badge-orange" style="margin-top: 0.5rem;">Dry "Loo" Winds</span>
+        </div>
+
+        <!-- Sensor 4: Solar Radiation -->
+        <div class="card card-highlight">
+          <span class="mono-tag">SENSOR 04 • SOLAR FLUX</span>
+          <div id="sensorSolar" style="font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; color: var(--red);">960 W/m²</div>
+          <p style="font-size: 0.82rem; margin-top: 0.35rem;">
+            Secondary standard thermopile pyranometer logging global irradiance.
+          </p>
+          <span class="badge badge-red" style="margin-top: 0.5rem;">UV Index 11.2 (Extreme)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explanation of How Weather Stations Work -->
+  <section class="py-5">
+    <div class="container">
+      <div class="grid-2" style="align-items: center;">
+        <div>
+          <span class="mono-tag">ENGINEERING OVERVIEW</span>
+          <h2>How Ground Weather Stations Operate</h2>
+          <p style="margin-bottom: 1rem;">
+            Automatic Weather Stations (AWS) provide real-time meteorological observations without human intervention. They continuously convert physical atmospheric phenomena into digital telemetry packets transmitted via satellite or low-power telemetry channels.
+          </p>
+          <div class="card" style="margin-top: 1.25rem;">
+            <ul style="padding-left: 1.2rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;">
+              <li><strong>Radiation Shields:</strong> Multi-plate louvred Stevenson screens prevent direct sunlight from biasing temperature probes.</li>
+              <li><strong>Calibrated Mast Heights:</strong> Ambient temperature is logged at standard 1.5–2 meters; wind velocity is logged at 10 meters above ground.</li>
+              <li><strong>Instant Data Logging:</strong> Microcontrollers sample values every 60 seconds and compute rolling averages for early warnings.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Station Details Table -->
+        <div class="card card-highlight">
+          <span class="mono-tag">NETWORK INVENTORY</span>
+          <h3>Active Regional Stations</h3>
+          <p style="font-size: 0.85rem; margin-bottom: 1rem;">Telemetry posts representing urban, agricultural, and desert environments.</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Station ID</th>
+                  <th>Terrain Type</th>
+                  <th>Sampling Interval</th>
+                  <th>Telemetry Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Node Alpha</strong></td>
+                  <td>Urban Ridge</td>
+                  <td>60 Seconds</td>
+                  <td><span class="badge badge-green">Online</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Node Beta</strong></td>
+                  <td>Agro-River Basin</td>
+                  <td>60 Seconds</td>
+                  <td><span class="badge badge-green">Online</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Node Gamma</strong></td>
+                  <td>Arid Desert Edge</td>
+                  <td>60 Seconds</td>
+                  <td><span class="badge badge-green">Online</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Step Bar -->
+      <div class="journey-bar">
+        <a href="forecasts.html" class="journey-link">
+          <span>Previous Module</span>
+          <strong>← Weather & Forecasts</strong>
+        </a>
+        <a href="comparison.html" class="journey-link" style="text-align: right;">
+          <span>Next Module</span>
+          <strong>Forecast Comparison →</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Shared Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color: #FFF; margin-bottom: 0.75rem;">AETHERIS<span>•</span></div>
+          <p style="color: #A8A199; font-size: 0.88rem; max-width: 32ch;">
+            Regional early warnings, surface micro-telemetry, and public safety protocols during extreme thermal events.
+          </p>
+        </div>
+        <div>
+          <div class="footer-title">Weather Information</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Overview</a></li>
+            <li><a href="forecasts.html">City Forecasts</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Monitoring & Telemetry</div>
+          <ul class="footer-links">
+            <li><a href="monitoring.html">Station Telemetry</a></li>
+            <li><a href="comparison.html">Forecast Accuracy</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Safety & Community</div>
+          <ul class="footer-links">
+            <li><a href="safety.html">Safety Protocols</a></li>
+            <li><a href="emergency.html">Emergency Helplines</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-sub">
+        <div>© 2026 Aetheris Initiative • Regional Atmospheric Resilience Network</div>
+        <div style="font-family: var(--font-mono);">Public Meteorological Advisory System</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

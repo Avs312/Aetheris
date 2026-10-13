@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aetheris | Heatwave Safety & Public Protocols</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top System Notice Bar -->
+  <div class="top-notice">
+    <div class="container notice-flex">
+      <div><span class="pulse-dot"></span><strong>LIVE STATUS:</strong> Public Health Advisory & Thermal Defense Active</div>
+      <div style="font-family: var(--font-mono);">Regional Atmospheric Surveillance Network • Operational Advisory</div>
+    </div>
+  </div>
+
+  <!-- Shared Global Navigation -->
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a href="index.html" class="brand">AETHERIS<span>•</span></a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰ Menu</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="forecasts.html">Forecasts</a></li>
+        <li><a href="monitoring.html">Monitoring</a></li>
+        <li><a href="comparison.html">Comparison</a></li>
+        <li><a href="safety.html" class="active">Safety Guide</a></li>
+        <li><a href="emergency.html">Emergency</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="py-3" style="border-bottom: 1px solid var(--border); background: var(--surface-alt);">
+    <div class="container">
+      <span class="mono-tag">PUBLIC HEALTH PROTOCOL</span>
+      <h1>Heatwave Safety & Precautionary Guide</h1>
+      <p>Targeted advisories, timeline precautions, and hydration standards to prevent heat-related medical emergencies.</p>
+    </div>
+  </section>
+
+  <!-- 1. Dedicated Audience Sections (Citizens, Farmers, Local Authorities) -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <span class="mono-tag">TARGETED AUDIENCE ADVISORIES</span>
+      <h2>Tailored Protection Guidelines</h2>
+      <p style="margin-bottom: 2rem;">Customized precautions based on daily exposure levels and community roles.</p>
+
+      <div class="grid-3">
+        <!-- Audience 1: Citizens -->
+        <div class="card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏠</div>
+          <h3>Citizens & Households</h3>
+          <p style="font-size: 0.88rem; margin-bottom: 1rem;">Protection for families, young children, and senior citizens.</p>
+          <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            <li>Remain indoors between <strong>12:00 PM and 4:00 PM</strong>.</li>
+            <li>Wear loose, light-colored, breathable cotton attire.</li>
+            <li>Cover windows with curtains or reflective bamboo blinds during peak sunlight.</li>
+            <li>Never leave children or pets inside parked automobiles.</li>
+          </ul>
+        </div>
+
+        <!-- Audience 2: Farmers -->
+        <div class="card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌾</div>
+          <h3>Farmers & Outdoor Workers</h3>
+          <p style="font-size: 0.88rem; margin-bottom: 1rem;">Actionable adjustments for agricultural labor and field workers.</p>
+          <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            <li>Shift outdoor field hours to <strong>05:30–10:30 AM</strong> and after <strong>4:30 PM</strong>.</li>
+            <li>Carry traditional ear-covering turbans, cloth caps, or umbrellas.</li>
+            <li>Take 15-minute shaded rest breaks every hour with ORS solution.</li>
+            <li>Provide shaded sheds and clean drinking water troughs for livestock.</li>
+          </ul>
+        </div>
+
+        <!-- Audience 3: Authorities -->
+        <div class="card">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏛️</div>
+          <h3>Local Municipal Authorities</h3>
+          <p style="font-size: 0.88rem; margin-bottom: 1rem;">Civic measures for city administration and health workers.</p>
+          <ul style="padding-left: 1.2rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            <li>Activate public cooling centers in community halls and libraries.</li>
+            <li>Ensure operational roadside water kiosks (<em>pyaau</em>) in bustling markets.</li>
+            <li>Equip primary health centers (PHCs) with dedicated ice packs and IV fluids.</li>
+            <li>Coordinate with power utilities to prevent afternoon power load shedding.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Precautions Timeline (Before, During, After) -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <span class="mono-tag">CHRONOLOGICAL PRECAUTIONS</span>
+      <h2>Timeline: Before, During & After a Heatwave</h2>
+      <p style="margin-bottom: 2rem;">A phased strategy to minimize physiological stress.</p>
+
+      <div class="grid-3">
+        <div class="card card-highlight">
+          <span class="mono-tag">PHASE 01 • BEFORE</span>
+          <h3>Preparation</h3>
+          <p style="font-size: 0.88rem; margin-top: 0.5rem;">
+            Stock Oral Rehydration Salts (ORS), glucose, and clean drinking water. Check fan and cooler operations. Verify that elderly neighbors have assistance.
+          </p>
+        </div>
+
+        <div class="card card-highlight">
+          <span class="mono-tag">PHASE 02 • DURING</span>
+          <h3>Peak Heat Defense</h3>
+          <p style="font-size: 0.88rem; margin-top: 0.5rem;">
+            Drink water every 20 minutes even if not thirsty. Use damp washcloths on the neck and forehead. Keep physical exertion minimal in unconditioned rooms.
+          </p>
+        </div>
+
+        <div class="card card-highlight">
+          <span class="mono-tag">PHASE 03 • AFTER</span>
+          <h3>Recovery & Reset</h3>
+          <p style="font-size: 0.88rem; margin-top: 0.5rem;">
+            Open cross-ventilation windows once evening breezes cool down. Continue electrolyte intake. Watch for lingering fatigue, dizziness, or dehydration signs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Hydration & Heat Illness Prevention (with Expandable HTML details) -->
+  <section class="py-5">
+    <div class="container">
+      <div class="grid-2">
+        <!-- Hydration Guide -->
+        <div>
+          <span class="mono-tag">HYDRATION ESSENTIALS</span>
+          <h2>Preventing Heat Exhaustion</h2>
+          <p style="margin-bottom: 1.25rem;">
+            Dehydration reduces the body's natural sweating mechanism, quickly spiking internal core temperature.
+          </p>
+
+          <div class="card">
+            <h4 style="margin-bottom: 0.5rem;">Recommended Cooling Fluids:</h4>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;">
+              <span class="badge badge-green">ORS Solution</span>
+              <span class="badge badge-green">Coconut Water</span>
+              <span class="badge badge-green">Chaas (Buttermilk)</span>
+              <span class="badge badge-green">Aam Panna</span>
+              <span class="badge badge-green">Lemon Shikanji</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              <strong>Avoid:</strong> High-sugar carbonated sodas, concentrated caffeine, and alcohol, as they act as diuretics and accelerate fluid loss.
+            </p>
+          </div>
+        </div>
+
+        <!-- Expandable Information Sections (HTML details/summary) -->
+        <div>
+          <span class="mono-tag">MEDICAL ADVISORIES</span>
+          <h2>Frequently Asked Questions</h2>
+          <p style="margin-bottom: 1.25rem;">Click to expand guidance on clinical heat mitigation.</p>
+
+          <details open>
+            <summary>Heat Exhaustion vs. Heatstroke</summary>
+            <div class="details-content">
+              <strong>Heat Exhaustion:</strong> Heavy sweating, pale clammy skin, weakness, dizziness, and nausea. Managed with rest and cool fluids.<br><br>
+              <strong>Heatstroke (Medical Emergency):</strong> High body temperature (>40°C), hot red dry skin (no sweating), rapid pulse, confusion, or fainting. Requires immediate emergency medical care (Call 108).
+            </div>
+          </details>
+
+          <details>
+            <summary>How to Keep Rooms Cool Without Air Conditioning</summary>
+            <div class="details-content">
+              Hang damp white sheets or vetiver (<em>khus</em>) mats over sunny windows. Use ceiling fans together with cross-ventilation during late nights. Place bowls of ice water in front of table fans for natural evaporative air currents.
+            </div>
+          </details>
+
+          <details>
+            <summary>Protecting Vulnerable Family Members</summary>
+            <div class="details-content">
+              Infants and seniors over 65 years have slower thermoregulation responses. Monitor room temperatures closely, ensure hourly hydration checks, and sponge their limbs with lukewarm water if room fans are insufficient.
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Navigation Step Bar -->
+      <div class="journey-bar">
+        <a href="comparison.html" class="journey-link">
+          <span>Previous Module</span>
+          <strong>← Forecast Comparison</strong>
+        </a>
+        <a href="emergency.html" class="journey-link" style="text-align: right;">
+          <span>Next Module</span>
+          <strong>Emergency & Help →</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Shared Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color: #FFF; margin-bottom: 0.75rem;">AETHERIS<span>•</span></div>
+          <p style="color: #A8A199; font-size: 0.88rem; max-width: 32ch;">
+            Regional early warnings, surface micro-telemetry, and public safety protocols during extreme thermal events.
+          </p>
+        </div>
+        <div>
+          <div class="footer-title">Weather Information</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Overview</a></li>
+            <li><a href="forecasts.html">City Forecasts</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Monitoring & Telemetry</div>
+          <ul class="footer-links">
+            <li><a href="monitoring.html">Station Telemetry</a></li>
+            <li><a href="comparison.html">Forecast Accuracy</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Safety & Community</div>
+          <ul class="footer-links">
+            <li><a href="safety.html">Safety Protocols</a></li>
+            <li><a href="emergency.html">Emergency Helplines</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-sub">
+        <div>© 2026 Aetheris Initiative • Regional Atmospheric Resilience Network</div>
+        <div style="font-family: var(--font-mono);">Public Meteorological Advisory System</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

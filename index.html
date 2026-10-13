@@ -1,316 +1,275 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aetheris — Heatwave Early Warning & Safety System</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/phase1-2.css">
-
-    <!-- Chart.js & jQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aetheris | Heatwave Early Warning & Monitoring</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="severity-orange">
+<body>
 
-    <!-- Subtle Heat Shimmer Canvas -->
-    <canvas id="heatShimmerCanvas"></canvas>
-
-    <!-- Top Alert Banner -->
-    <div id="topSeverityBanner" class="top-alert-bar">
-        <div class="banner-content">
-            <span class="pulse-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
-            <strong id="bannerSeverityTitle">Severe Heatwave Alert (Orange Level):</strong>
-            <span id="bannerSeverityDesc">Real-feel temperatures reach 48.5°C in Vidarbha and West Rajasthan. Stay hydrated and avoid outdoor activity from 11 AM to 4 PM.</span>
-        </div>
-        <div class="banner-actions">
-            <button id="btnListenBanner" class="btn-banner-audio" title="Listen Alert Aloud">
-                <i class="fa-solid fa-volume-high"></i> Listen
-            </button>
-            <button class="btn-banner-close" onclick="$('#topSeverityBanner').slideUp();" title="Close"><i class="fa-solid fa-xmark"></i></button>
-        </div>
+  <!-- Top System Notice Bar -->
+  <div class="top-notice">
+    <div class="container notice-flex">
+      <div><span class="pulse-dot"></span><strong>LIVE STATUS:</strong> Severe Heatwave Condition Active</div>
+      <div style="font-family: var(--font-mono);">Regional Atmospheric Surveillance Network • Operational Advisory</div>
     </div>
+  </div>
 
-    <!-- Main Navigation Header -->
-    <header class="main-header">
-        <div class="header-container">
-            <a href="index.html" class="brand-box">
-                <div class="brand-logo">
-                    <i class="fa-solid fa-sun"></i>
-                </div>
-                <div class="brand-text">
-                    <h1>Aetheris</h1>
-                    <p class="subtitle">Heatwave Warning & Public Safety Portal</p>
-                </div>
-            </a>
+  <!-- Shared Global Navigation -->
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a href="index.html" class="brand">AETHERIS<span>•</span></a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰ Menu</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="forecasts.html">Forecasts</a></li>
+        <li><a href="monitoring.html">Monitoring</a></li>
+        <li><a href="comparison.html">Comparison</a></li>
+        <li><a href="safety.html">Safety Guide</a></li>
+        <li><a href="emergency.html">Emergency</a></li>
+      </ul>
+    </div>
+  </header>
 
-            <!-- Severity Status & Simulation -->
-            <div class="header-status-box">
-                <div class="severity-pill" id="currentSeverityPill">
-                    <span class="status-dot"></span>
-                    <span class="severity-label" id="severityPillLabel">Alert (Orange)</span>
-                    <span class="temp-badge" id="pillTempBadge">42.8°C (Feels 48.5°C)</span>
-                </div>
-
-                <div class="sim-controls">
-                    <label for="severitySimSelect">Status:</label>
-                    <select id="severitySimSelect" class="form-select-sm">
-                        <option value="green">Green (Normal)</option>
-                        <option value="yellow">Yellow (Watch)</option>
-                        <option value="orange" selected>Orange (Alert)</option>
-                        <option value="red">Red (Warning)</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Accessibility & Actions -->
-            <div class="header-actions">
-                <div class="lang-audio-controls">
-                    <select id="appLangSelect" class="form-select-sm" title="Select Voice & Text Language">
-                        <option value="en-US">English</option>
-                        <option value="hi-IN">हिन्दी (Hindi)</option>
-                        <option value="mr-IN">मराठी (Marathi)</option>
-                    </select>
-                    <button id="btnToggleAudioFeedback" class="btn-icon active" title="Toggle Sound Feedback">
-                        <i class="fa-solid fa-bell"></i>
-                    </button>
-                    <button id="btnStopSpeech" class="btn-icon btn-danger-soft hidden" title="Stop Reading">
-                        <i class="fa-solid fa-circle-stop"></i>
-                    </button>
-                </div>
-
-                <!-- Emergency SOS Trigger Button -->
-                <a href="../dev 3/emergency-sos.html" class="btn-sos-trigger">
-                    <i class="fa-solid fa-phone"></i> Emergency Help
-                </a>
-            </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="grid-2" style="align-items: center;">
+        <div>
+          <span class="mono-tag">Regional Atmospheric Surveillance</span>
+          <h1>Early Detection for Extreme Thermal Events.</h1>
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+            A responsive climate awareness and thermal monitoring system designed to safeguard communities against severe seasonal heatwaves through timely, transparent meteorological indicators.
+          </p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="forecasts.html" class="btn btn-dark">Explore Forecasts →</a>
+            <a href="monitoring.html" class="btn btn-outline">Station Telemetry</a>
+          </div>
         </div>
-    </header>
-
-    <!-- Clean Navigation Bar -->
-    <nav class="phase-navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-link active">
-                <i class="fa-solid fa-house"></i> Overview
-            </a>
-            <a href="phase1-2.html" class="nav-link">
-                <i class="fa-solid fa-cloud-sun"></i> Weather & Forecast
-            </a>
-            <a href="../dev 2/phase3-4.html" class="nav-link">
-                <i class="fa-solid fa-tower-broadcast"></i> Live Stations
-            </a>
-            <a href="../dev 3/phase5-advisory.html" class="nav-link">
-                <i class="fa-solid fa-book-open"></i> Safety Guides
-            </a>
-            <a href="../dev 3/emergency-sos.html" class="nav-link">
-                <i class="fa-solid fa-truck-medical"></i> Emergency Help
-            </a>
-            <a href="../dev 3/community.html" class="nav-link">
-                <i class="fa-solid fa-users"></i> Community & Contacts
-            </a>
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80" alt="Arid landscape under sun" class="hero-img">
+          <div class="hero-stat-card">
+            <span class="badge badge-orange" style="margin-bottom: 0.3rem;">ORANGE ALERT ACTIVE</span>
+            <div style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;">43.8°C Recorded Peak</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Northern & Central Plains</div>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
+  </section>
 
-    <!-- Main Content Container -->
-    <main class="main-body">
+  <!-- Key Statistics & Current Status -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <span class="mono-tag">CURRENT REGIONAL METRICS</span>
+      <h2>Today's Thermal Index Summary</h2>
+      <p style="margin-bottom: 2rem;">Real-time synoptic metrics representing peak afternoon ambient measurements.</p>
 
-        <!-- How Aetheris Works (5 Simple Steps) -->
+      <div class="grid-3">
+        <div class="card card-highlight">
+          <span class="mono-tag">METRIC 01 • PEAK AMBIENT</span>
+          <div style="font-family: var(--font-serif); font-size: 2.8rem; font-weight: 600; color: var(--terracotta);">43.8°C</div>
+          <p style="font-size: 0.88rem; margin-top: 0.5rem;">
+            <strong>+4.5°C departure from normal.</strong> Highest daytime temperature recorded at central plains benchmark.
+          </p>
+        </div>
+
+        <div class="card card-highlight">
+          <span class="mono-tag">METRIC 02 • FEELS LIKE</span>
+          <div style="font-family: var(--font-serif); font-size: 2.8rem; font-weight: 600; color: var(--charcoal);">47.5°C</div>
+          <p style="font-size: 0.88rem; margin-top: 0.5rem;">
+            <strong>Heat Index calculation.</strong> Combined effect of 43.8°C air temperature with 28% relative surface humidity.
+          </p>
+        </div>
+
+        <div class="card card-highlight">
+          <span class="mono-tag">METRIC 03 • RISK ZONE COUNT</span>
+          <div style="font-family: var(--font-serif); font-size: 2.8rem; font-weight: 600; color: var(--red);">14 Districts</div>
+          <p style="font-size: 0.88rem; margin-top: 0.5rem;">
+            <strong>Active Heatwave Advisory.</strong> Municipalities currently placed under severe thermal watch and hydration protocols.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7-Day CSS Bar Forecast & Heatwave Concept Explanation -->
+  <section class="py-5">
+    <div class="container">
+      <div class="grid-2">
+        <!-- 7-Day CSS Bars Forecast -->
         <div class="card">
-            <div class="card-header">
-                <h3><i class="fa-solid fa-shield-halved"></i> How Aetheris Keeps You Safe (5 Steps)</h3>
-                <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> All Systems Active</span>
+          <span class="mono-tag">7-DAY PROJECTION</span>
+          <h3>Weekly Temperature Outlook</h3>
+          <p style="margin-bottom: 1.25rem;">Visual synoptic projection across the upcoming seven days.</p>
+
+          <div class="css-bar-list">
+            <div class="bar-row">
+              <div class="bar-day">Monday</div>
+              <div class="bar-track"><div class="bar-fill fill-yellow" style="width: 78%;"></div></div>
+              <div class="bar-val">41.2°C</div>
             </div>
-            <div class="grid-4col" style="grid-template-columns: repeat(5, 1fr);">
-                <a href="phase1-2.html" class="card" style="margin-bottom:0; text-decoration:none; border-top: 3px solid #2563eb;">
-                    <div style="font-size: 11px; font-weight:700; color:#2563eb; text-transform:uppercase;">Step 1</div>
-                    <h4 style="font-size: 14px; margin: 4px 0 6px 0; color: var(--text-primary);">Past Weather</h4>
-                    <p style="font-size: 12px; color: var(--text-secondary);">Long-term records, cleaned and checked for accuracy.</p>
-                    <span class="badge badge-success mt-2" style="font-size:10.5px;">Verified</span>
-                </a>
-
-                <a href="phase1-2.html" class="card" style="margin-bottom:0; text-decoration:none; border-top: 3px solid #ea580c;">
-                    <div style="font-size: 11px; font-weight:700; color:#ea580c; text-transform:uppercase;">Step 2</div>
-                    <h4 style="font-size: 14px; margin: 4px 0 6px 0; color: var(--text-primary);">7-Day Forecast</h4>
-                    <p style="font-size: 12px; color: var(--text-secondary);">Predicted maximum heat and humidity risk levels.</p>
-                    <span class="badge badge-primary mt-2" style="font-size:10.5px;">Updated</span>
-                </a>
-
-                <a href="../dev 2/phase3-4.html" class="card" style="margin-bottom:0; text-decoration:none; border-top: 3px solid #16a34a;">
-                    <div style="font-size: 11px; font-weight:700; color:#16a34a; text-transform:uppercase;">Step 3</div>
-                    <h4 style="font-size: 14px; margin: 4px 0 6px 0; color: var(--text-primary);">Live Weather</h4>
-                    <p style="font-size: 12px; color: var(--text-secondary);">Real-time readings from ground weather stations.</p>
-                    <span class="badge badge-success mt-2" style="font-size:10.5px;">Live Stream</span>
-                </a>
-
-                <a href="../dev 2/phase3-4.html" class="card" style="margin-bottom:0; text-decoration:none; border-top: 3px solid #0284c7;">
-                    <div style="font-size: 11px; font-weight:700; color:#0284c7; text-transform:uppercase;">Step 4</div>
-                    <h4 style="font-size: 14px; margin: 4px 0 6px 0; color: var(--text-primary);">Accuracy Check</h4>
-                    <p style="font-size: 12px; color: var(--text-secondary);">Comparing forecast models with real sensor readings.</p>
-                    <span class="badge badge-info mt-2" style="font-size:10.5px;">98.4% Acc.</span>
-                </a>
-
-                <a href="../dev 3/phase5-advisory.html" class="card" style="margin-bottom:0; text-decoration:none; border-top: 3px solid #dc2626;">
-                    <div style="font-size: 11px; font-weight:700; color:#dc2626; text-transform:uppercase;">Step 5</div>
-                    <h4 style="font-size: 14px; margin: 4px 0 6px 0; color: var(--text-primary);">Safety & SOS</h4>
-                    <p style="font-size: 12px; color: var(--text-secondary);">Personalized advice, symptom check, and 1-tap SOS.</p>
-                    <span class="badge badge-danger mt-2" style="font-size:10.5px;">Ready</span>
-                </a>
+            <div class="bar-row">
+              <div class="bar-day">Tuesday</div>
+              <div class="bar-track"><div class="bar-fill fill-orange" style="width: 84%;"></div></div>
+              <div class="bar-val">42.8°C</div>
             </div>
+            <div class="bar-row">
+              <div class="bar-day">Wednesday</div>
+              <div class="bar-track"><div class="bar-fill fill-orange" style="width: 88%;"></div></div>
+              <div class="bar-val">43.5°C</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-day">Thursday</div>
+              <div class="bar-track"><div class="bar-fill fill-red" style="width: 95%;"></div></div>
+              <div class="bar-val">44.6°C</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-day">Friday</div>
+              <div class="bar-track"><div class="bar-fill fill-red" style="width: 93%;"></div></div>
+              <div class="bar-val">44.1°C</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-day">Saturday</div>
+              <div class="bar-track"><div class="bar-fill fill-orange" style="width: 85%;"></div></div>
+              <div class="bar-val">43.0°C</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-day">Sunday</div>
+              <div class="bar-track"><div class="bar-fill fill-yellow" style="width: 76%;"></div></div>
+              <div class="bar-val">40.8°C</div>
+            </div>
+          </div>
+          <div style="margin-top: 1.25rem; font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono);">
+            Scale: Baseline 30°C to Peak 48°C • Regional Thermal Trajectory
+          </div>
         </div>
 
-        <!-- Key Numbers Grid -->
-        <div class="grid-4col">
-            <div class="card" style="border-left: 4px solid #ea580c;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span style="font-size:11.5px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Today's Max Temp</span>
-                        <h2 style="font-size: 30px; font-weight:800; margin: 4px 0; color: var(--text-primary);" id="dashAirTemp">43.2 °C</h2>
-                        <span class="text-danger" style="font-size:12px; font-weight:600;"><i class="fa-solid fa-arrow-up"></i> +5.4°C above normal</span>
-                    </div>
-                    <div style="font-size: 28px; color: #ea580c;"><i class="fa-solid fa-temperature-high"></i></div>
-                </div>
-            </div>
-
-            <div class="card" style="border-left: 4px solid #dc2626;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span style="font-size:11.5px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Real-Feel (Heat + Humidity)</span>
-                        <h2 style="font-size: 30px; font-weight:800; margin: 4px 0; color: var(--text-primary);" id="dashHeatIndex">49.8 °C</h2>
-                        <span class="text-warning" style="font-size:12px; font-weight:600;"><i class="fa-solid fa-droplet"></i> Humidity: 48%</span>
-                    </div>
-                    <div style="font-size: 28px; color: #dc2626;"><i class="fa-solid fa-fire"></i></div>
-                </div>
-            </div>
-
-            <div class="card" style="border-left: 4px solid #d97706;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span style="font-size:11.5px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Heat Stress Risk</span>
-                        <h2 style="font-size: 30px; font-weight:800; margin: 4px 0; color: var(--text-primary);" id="dashWBGT">32.4 °C</h2>
-                        <span class="text-danger" style="font-size:12px; font-weight:600;"><i class="fa-solid fa-triangle-exclamation"></i> High Risk Zone</span>
-                    </div>
-                    <div style="font-size: 28px; color: #d97706;"><i class="fa-solid fa-sun"></i></div>
-                </div>
-            </div>
-
-            <div class="card" style="border-left: 4px solid #16a34a;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span style="font-size:11.5px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Live Ground Stations</span>
-                        <h2 style="font-size: 30px; font-weight:800; margin: 4px 0; color: var(--text-primary);">42 / 45</h2>
-                        <span class="text-success" style="font-size:12px; font-weight:600;"><i class="fa-solid fa-circle-check"></i> Connected & Online</span>
-                    </div>
-                    <div style="font-size: 28px; color: #16a34a;"><i class="fa-solid fa-tower-broadcast"></i></div>
-                </div>
-            </div>
+        <!-- Heatwave Explanation -->
+        <div>
+          <span class="mono-tag">METEOROLOGY BASICS</span>
+          <h2>What is a Meteorological Heatwave?</h2>
+          <p style="margin-bottom: 1rem;">
+            A heatwave is an extended period of abnormally high temperatures, typically accompanied by dry north-westerly winds known regionally as the <em>Loo</em>.
+          </p>
+          <p style="margin-bottom: 1rem;">
+            According to the <strong>India Meteorological Department (IMD)</strong>, a heatwave in the plains is officially declared when the maximum temperature reaches at least <strong>40°C</strong> and exceeds the historical normal by <strong>4.5°C to 6.4°C</strong>.
+          </p>
+          <div class="card card-highlight" style="margin-top: 1.5rem;">
+            <h4 style="margin-bottom: 0.4rem;">Key Driving Factors:</h4>
+            <ul style="padding-left: 1.2rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+              <li><strong>Anticyclonic High Pressure:</strong> Descending dry air traps surface heat.</li>
+              <li><strong>Urban Heat Island (UHI):</strong> Dense concrete absorbs and retains radiation overnight.</li>
+              <li><strong>Low Soil Moisture:</strong> Limits evaporative cooling in arid agricultural belts.</li>
+            </ul>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Main Visualizer Grid -->
-        <div class="grid-2col">
-            <!-- Left: 7-Day Regional Forecast Chart -->
-            <div class="card">
-                <div class="card-header">
-                    <h3><i class="fa-solid fa-chart-line"></i> 7-Day Regional Temperature Forecast</h3>
-                    <div class="card-tools">
-                        <select id="overviewRegionSelect" class="form-select-sm">
-                            <option value="vidarbha">Vidarbha (Nagpur)</option>
-                            <option value="rajasthan">West Rajasthan (Jodhpur)</option>
-                            <option value="delhi">Delhi NCR</option>
-                            <option value="andhra">Coastal Andhra (Vijayawada)</option>
-                        </select>
-                        <button id="btnTTSOverviewChart" class="btn-icon" title="Listen to Forecast">
-                            <i class="fa-solid fa-volume-high"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="overviewForecastChart"></canvas>
-                </div>
-            </div>
+  <!-- Complete Site Directory / Chapter Cards -->
+  <section class="py-5" style="background: var(--surface-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <span class="mono-tag">SURVEILLANCE MODULES</span>
+      <h2>Explore Monitoring Sections</h2>
+      <p style="margin-bottom: 2rem;">Seamless navigation across our environmental intelligence network.</p>
 
-            <!-- Right: Active Hotspots & Quick SOS Link -->
-            <div class="card">
-                <div class="card-header">
-                    <h3><i class="fa-solid fa-location-dot"></i> Areas with Highest Heat Today</h3>
-                    <span class="badge badge-danger">4 Hotspots</span>
-                </div>
-                <div style="display:flex; flex-direction:column; gap: 10px;">
-                    <div class="card" style="margin-bottom:0; background: #fff5f5; border: 1px solid #fecaca; border-left: 3px solid #dc2626; padding: 12px 14px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <h4 style="font-size: 14px; color:var(--text-primary);">Chandrapur, Vidarbha</h4>
-                                <p style="font-size: 12px; color: var(--text-secondary);">Max: 46.8°C | +6.8°C above normal</p>
-                            </div>
-                            <span class="badge badge-danger">Severe Heatwave</span>
-                        </div>
-                    </div>
+      <div class="grid-3">
+        <a href="forecasts.html" class="card">
+          <span class="mono-tag">METEOROLOGY</span>
+          <h3>Weather & Forecasts</h3>
+          <p>Multi-city forecasts, historical temperature archive table, and warning level criteria.</p>
+        </a>
 
-                    <div class="card" style="margin-bottom:0; background: #fff7ed; border: 1px solid #fed7aa; border-left: 3px solid #ea580c; padding: 12px 14px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <h4 style="font-size: 14px; color:var(--text-primary);">Churu, West Rajasthan</h4>
-                                <p style="font-size: 12px; color: var(--text-secondary);">Max: 45.4°C | +5.2°C above normal</p>
-                            </div>
-                            <span class="badge badge-warning">Heatwave</span>
-                        </div>
-                    </div>
+        <a href="monitoring.html" class="card">
+          <span class="mono-tag">TELEMETRY</span>
+          <h3>Weather Station Monitoring</h3>
+          <p>Real-time ground-level telemetry: temperature, humidity, wind velocity, and solar radiation.</p>
+        </a>
 
-                    <div class="card" style="margin-bottom:0; background: #fff7ed; border: 1px solid #fed7aa; border-left: 3px solid #ea580c; padding: 12px 14px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <h4 style="font-size: 14px; color:var(--text-primary);">Brahmapuri, Maharashtra</h4>
-                                <p style="font-size: 12px; color: var(--text-secondary);">Max: 45.2°C | +4.9°C above normal</p>
-                            </div>
-                            <span class="badge badge-warning">Heatwave</span>
-                        </div>
-                    </div>
+        <a href="comparison.html" class="card">
+          <span class="mono-tag">VERIFICATION</span>
+          <h3>Forecast Accuracy Comparison</h3>
+          <p>Side-by-side verification table comparing predicted models with ground observations.</p>
+        </a>
 
-                    <div class="card" style="margin-bottom:0; background: #fffbeb; border: 1px solid #fde68a; border-left: 3px solid #d97706; padding: 12px 14px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <h4 style="font-size: 14px; color:var(--text-primary);">Noida / New Delhi</h4>
-                                <p style="font-size: 12px; color: var(--text-secondary);">Max: 42.5°C | +3.6°C above normal</p>
-                            </div>
-                            <span class="badge badge-warning">Heat Watch</span>
-                        </div>
-                    </div>
-                </div>
+        <a href="safety.html" class="card">
+          <span class="mono-tag">SAFETY PROTOCOLS</span>
+          <h3>Heatwave Safety Guide</h3>
+          <p>Precautionary protocols for citizens, agricultural labor, and local civic authorities.</p>
+        </a>
 
-                <div class="card mt-3" style="margin-bottom:0; background: #fef2f2; border: 1px solid #fecaca;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 12px;">
-                        <div>
-                            <h4 style="color:#991b1b; font-size:14px;"><i class="fa-solid fa-heart-pulse"></i> Feeling sick from the heat?</h4>
-                            <p style="font-size:12.5px; color:var(--text-secondary);">Check symptoms or share your location for emergency help.</p>
-                        </div>
-                        <a href="../dev 3/emergency-sos.html" class="btn btn-danger btn-sm">
-                            Get Emergency Help <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <a href="emergency.html" class="card">
+          <span class="mono-tag">COMMUNITY ASSISTANCE</span>
+          <h3>Emergency & Community Help</h3>
+          <p>National helplines (112, 108), cooling shelter directory, and public observation logging.</p>
+        </a>
+
+        <div class="card" style="background: var(--surface);">
+          <span class="mono-tag">NETWORK OVERVIEW</span>
+          <h3>About Aetheris</h3>
+          <p>Dedicated to public thermal resilience, microclimatic telemetry, and rapid community alerts.</p>
         </div>
-    </main>
+      </div>
 
-    <!-- Footer -->
-    <footer class="app-footer">
-        <div class="footer-container">
-            <p><strong>Aetheris</strong> — Heatwave Warning & Public Safety Portal © 2026.</p>
-            <p class="footer-sub">Built with HTML5, CSS3, JavaScript (ES6+), and jQuery. Designed for public accessibility.</p>
+      <!-- Linear User Journey -->
+      <div class="journey-bar">
+        <div class="journey-link">
+          <span>Current Location</span>
+          <strong>Home & Overview</strong>
         </div>
-    </footer>
+        <a href="forecasts.html" class="journey-link" style="text-align: right;">
+          <span>Next Module</span>
+          <strong>Weather & Forecasts →</strong>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Scripts -->
-    <script src="js/global.js"></script>
-    <script src="js/phase1-2.js"></script>
+  <!-- Global Shared Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color: #FFF; margin-bottom: 0.75rem;">AETHERIS<span>•</span></div>
+          <p style="color: #A8A199; font-size: 0.88rem; max-width: 32ch;">
+            Regional early warnings, surface micro-telemetry, and public safety protocols during extreme thermal events.
+          </p>
+        </div>
+        <div>
+          <div class="footer-title">Weather Information</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Overview</a></li>
+            <li><a href="forecasts.html">City Forecasts</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Monitoring & Telemetry</div>
+          <ul class="footer-links">
+            <li><a href="monitoring.html">Station Telemetry</a></li>
+            <li><a href="comparison.html">Forecast Accuracy</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Safety & Community</div>
+          <ul class="footer-links">
+            <li><a href="safety.html">Safety Protocols</a></li>
+            <li><a href="emergency.html">Emergency Helplines</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-sub">
+        <div>© 2026 Aetheris Initiative • Regional Atmospheric Resilience Network</div>
+        <div style="font-family: var(--font-mono);">Public Meteorological Advisory System</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,216 @@
+﻿/* ==========================================================================
+   HEATWAVE EARLY WARNING SYSTEM — COMPACT EDITORIAL STYLESHEET
+   Developed for College Frontend Evaluation (HTML5 + CSS3 + Vanilla JS)
+   Design: Warm off-white, Sand, Muted Orange/Terracotta, Olive & Charcoal.
+   ========================================================================== */
+
+/* 1. ROOT VARIABLES (Color Palette & Fonts) */
+:root {
+  --bg: #FAF8F5;               /* Off-white canvas */
+  --surface: #FFFFFF;          /* Pure card surface */
+  --surface-alt: #F4EFE6;      /* Warm beige surface */
+  --text: #23201D;             /* Charcoal text */
+  --text-muted: #6C665F;       /* Warm grey text */
+  --border: rgba(35, 32, 29, 0.12);
+  --border-dark: rgba(35, 32, 29, 0.25);
+  
+  /* Alert / Heat Palette */
+  --terracotta: #C85A32;       /* Orange / Severe Warning */
+  --sand: #D5B99A;             /* Warm accent */
+  --olive: #556B54;            /* Green / Normal Alert */
+  --amber: #D6942D;            /* Yellow / Watch */
+  --red: #A82C26;              /* Red / Emergency */
+  --charcoal: #1E1C1A;         /* Deep contrast */
+
+  /* Fonts */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+/* 2. BASE RESET */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  font-size: 16px;
+}
+img { max-width: 100%; height: auto; display: block; border-radius: 6px; }
+a { color: inherit; text-decoration: none; transition: 0.2s ease; }
+
+/* 3. TYPOGRAPHY */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; line-height: 1.2; }
+h1 { font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 1rem; }
+h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); margin-bottom: 0.75rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+p { color: var(--text-muted); font-size: 0.98rem; }
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* 4. LAYOUT & GRIDS */
+.container { width: 90%; max-width: 1180px; margin: 0 auto; }
+.py-5 { padding: 4.5rem 0; }
+.py-3 { padding: 2.5rem 0; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+
+/* 5. TOP NOTICE & NAVBAR */
+.top-notice {
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+  padding: 0.4rem 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.notice-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.pulse-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--terracotta); margin-right: 6px;
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.navbar {
+  position: sticky; top: 0; z-index: 99;
+  background: rgba(250, 248, 245, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-flex { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+.brand { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; }
+.brand span { color: var(--terracotta); }
+.nav-menu { display: flex; list-style: none; gap: 1.5rem; }
+.nav-menu a { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); padding: 0.25rem 0; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--terracotta); font-weight: 600; border-bottom: 2px solid var(--terracotta); }
+.menu-btn { display: none; background: none; border: 1px solid var(--border); padding: 0.4rem 0.7rem; border-radius: 4px; cursor: pointer; }
+
+/* 6. BUTTONS & BADGES */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.65rem 1.4rem; border-radius: 4px; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; border: 1px solid transparent; transition: 0.2s;
+}
+.btn-dark { background: var(--charcoal); color: #FFF; }
+.btn-dark:hover { background: var(--terracotta); }
+.btn-outline { background: transparent; border-color: var(--border-dark); color: var(--text); }
+.btn-outline:hover { background: var(--surface-alt); }
+.btn-accent { background: var(--terracotta); color: #FFF; }
+.btn-accent:hover { background: #b04924; }
+
+.badge {
+  display: inline-flex; align-items: center; padding: 0.25rem 0.6rem;
+  border-radius: 20px; font-size: 0.72rem; font-family: var(--font-mono); font-weight: 600;
+}
+.badge-green { background: #EEF4EE; color: var(--olive); }
+.badge-yellow { background: #FEF8EC; color: #9A660B; }
+.badge-orange { background: #FCEEE8; color: var(--terracotta); }
+.badge-red { background: #FCEEEC; color: var(--red); }
+
+/* 7. CARDS & HERO */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.5rem; transition: 0.2s;
+}
+.card:hover { border-color: var(--border-dark); transform: translateY(-2px); }
+.card-highlight { background: var(--surface-alt); }
+
+.hero { padding: 4rem 0 3rem 0; border-bottom: 1px solid var(--border); }
+.hero-img-wrap { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.hero-img { width: 100%; height: 380px; object-fit: cover; }
+.hero-stat-card {
+  position: absolute; bottom: 1.5rem; left: 1.5rem;
+  background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(6px);
+  padding: 1rem 1.25rem; border-radius: 6px; border: 1px solid var(--border);
+}
+
+/* 8. PURE CSS BARS (7-DAY FORECAST & ACCURACY) */
+.css-bar-list { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1rem; }
+.bar-row { display: grid; grid-template-columns: 80px 1fr 55px; align-items: center; gap: 0.75rem; }
+.bar-day { font-size: 0.85rem; font-weight: 600; }
+.bar-track { background: var(--surface-alt); height: 18px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); }
+.bar-fill { height: 100%; border-radius: 4px; }
+.fill-green { background: var(--olive); }
+.fill-yellow { background: var(--amber); }
+.fill-orange { background: var(--terracotta); }
+.fill-red { background: var(--red); }
+.bar-val { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; text-align: right; }
+
+/* Dual Bars for Model Comparison */
+.dual-bar-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
+.dual-bar-line { display: grid; grid-template-columns: 75px 1fr 50px; align-items: center; gap: 0.5rem; font-size: 0.78rem; }
+.track-pred { background: var(--surface-alt); height: 12px; border-radius: 2px; }
+.fill-pred { background: var(--terracotta); height: 100%; }
+.fill-obs { background: var(--charcoal); height: 100%; }
+
+/* 9. DATA TABLES */
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; }
+th { background: var(--surface-alt); padding: 0.85rem 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+
+/* 10. EXPANDABLE SECTIONS (CSS / HTML details) */
+details { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 0.75rem; }
+details[open] { border-color: var(--border-dark); }
+summary { padding: 1.1rem 1.25rem; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: '+'; color: var(--terracotta); font-weight: bold; }
+details[open] summary::after { content: '−'; }
+.details-content { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.92rem; }
+
+/* 11. FORMS & INPUTS */
+.form-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; }
+.form-group { margin-bottom: 1rem; }
+label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.35rem; }
+input, select, textarea {
+  width: 100%; padding: 0.65rem 0.85rem; border: 1px solid var(--border-dark);
+  border-radius: 4px; font-size: 0.9rem; background: var(--surface); color: var(--text);
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--terracotta); }
+
+/* 12. JOURNEY BAR & FOOTER */
+.journey-bar {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  padding: 1.25rem 1.75rem; display: flex; justify-content: space-between; align-items: center;
+  margin-top: 3.5rem; flex-wrap: wrap; gap: 1rem;
+}
+.journey-link span { display: block; font-size: 0.7rem; font-family: var(--font-mono); color: var(--text-muted); text-transform: uppercase; }
+.journey-link strong { font-family: var(--font-serif); font-size: 1.15rem; color: var(--text); }
+.journey-link:hover strong { color: var(--terracotta); }
+
+footer { background: var(--charcoal); color: #FAF8F5; padding: 3.5rem 0 2rem; margin-top: 4rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+.footer-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--sand); text-transform: uppercase; margin-bottom: 0.75rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; color: #A8A199; }
+.footer-links a:hover { color: #FFF; }
+.footer-sub { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.8rem; color: #888; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+/* 13. RESPONSIVE BREAKPOINTS */
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .grid-2, .grid-4 { grid-template-columns: 1fr; }
+  .menu-btn { display: block; }
+  .nav-menu {
+    position: fixed; top: 60px; left: 0; width: 100%;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 1.5rem; display: none;
+  }
+  .nav-menu.open { display: flex; }
+  .hero-img { height: 260px; }
+  .footer-grid { grid-template-columns: 1fr; }
+}

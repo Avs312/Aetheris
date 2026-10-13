@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aetheris | Weather & 7-Day Forecasts</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top System Notice Bar -->
+  <div class="top-notice">
+    <div class="container notice-flex">
+      <div><span class="pulse-dot"></span><strong>LIVE STATUS:</strong> Synoptic Forecast Cycle Active</div>
+      <div style="font-family: var(--font-mono);">Regional Atmospheric Surveillance Network • Operational Advisory</div>
+    </div>
+  </div>
+
+  <!-- Shared Global Navigation -->
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a href="index.html" class="brand">AETHERIS<span>•</span></a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰ Menu</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="forecasts.html" class="active">Forecasts</a></li>
+        <li><a href="monitoring.html">Monitoring</a></li>
+        <li><a href="comparison.html">Comparison</a></li>
+        <li><a href="safety.html">Safety Guide</a></li>
+        <li><a href="emergency.html">Emergency</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="py-3" style="border-bottom: 1px solid var(--border); background: var(--surface-alt);">
+    <div class="container">
+      <span class="mono-tag">SYNOPTIC METEOROLOGY</span>
+      <h1>Regional Forecasts & Temperature Matrix</h1>
+      <p>Seven-day thermal projections, multi-city readings, and historical records across key Indian climate regions.</p>
+    </div>
+  </section>
+
+  <!-- 1. Color-Coded Risk Legend & Warning Level Explanation -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <span class="mono-tag">METEOROLOGICAL CLASSIFICATION</span>
+      <h2>Heatwave Alert Levels (IMD Protocol)</h2>
+      <p style="margin-bottom: 2rem;">Recognized criteria for tiered public heat danger warnings.</p>
+
+      <div class="grid-4">
+        <div class="card" style="border-left: 4px solid var(--olive);">
+          <span class="badge badge-green">GREEN • NORMAL</span>
+          <h3 style="margin-top: 0.6rem;">No Warning</h3>
+          <p style="font-size: 0.85rem; margin-bottom: 0.5rem;"><strong>&lt; 40.0°C</strong></p>
+          <p style="font-size: 0.85rem;">Standard seasonal temperatures. No thermal distress expected for general populace.</p>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--amber);">
+          <span class="badge badge-yellow">YELLOW • WATCH</span>
+          <h3 style="margin-top: 0.6rem;">Be Updated</h3>
+          <p style="font-size: 0.85rem; margin-bottom: 0.5rem;"><strong>40.0°C – 42.5°C</strong></p>
+          <p style="font-size: 0.85rem;">Moderate heat. Tolerable for general public, but health caution needed for outdoor labor.</p>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--terracotta);">
+          <span class="badge badge-orange">ORANGE • ALERT</span>
+          <h3 style="margin-top: 0.6rem;">Be Prepared</h3>
+          <p style="font-size: 0.85rem; margin-bottom: 0.5rem;"><strong>42.6°C – 44.5°C</strong></p>
+          <p style="font-size: 0.85rem;">Severe heat stress. High probability of heat illness and heatstroke in children & elderly.</p>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--red);">
+          <span class="badge badge-red">RED • WARNING</span>
+          <h3 style="margin-top: 0.6rem;">Take Action</h3>
+          <p style="font-size: 0.85rem; margin-bottom: 0.5rem;"><strong>&gt; 44.5°C or >2 Days</strong></p>
+          <p style="font-size: 0.85rem;">Extreme medical emergency. All outdoor activities should be suspended during noon hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Selected Cities Temperature Cards -->
+  <section class="py-5" style="border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+        <div>
+          <span class="mono-tag">REGIONAL MONITORING STATIONS</span>
+          <h2>Major Urban & Inland Centers</h2>
+          <p>Real-time readings across diverse geographic zones.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.78rem;" onclick="filterCities('all')">Show All</button>
+          <button class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.78rem;" onclick="filterCities('red')">Red Alert</button>
+          <button class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.78rem;" onclick="filterCities('orange')">Orange Alert</button>
+          <button class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.78rem;" onclick="filterCities('yellow')">Yellow/Normal</button>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <!-- City 1 -->
+        <div class="card city-card" data-risk="orange">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3>New Delhi</h3>
+            <span class="badge badge-orange">Orange Alert</span>
+          </div>
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--terracotta);">43.8°C</div>
+          <p style="font-size: 0.85rem; margin: 0.5rem 0;">Condition: Dry Blistering Winds (Loo) • Humidity 24%</p>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Min: 31.0°C | Departure: +4.8°C</div>
+        </div>
+
+        <!-- City 2 -->
+        <div class="card city-card" data-risk="red">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3>Nagpur</h3>
+            <span class="badge badge-red">Red Alert</span>
+          </div>
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--red);">45.2°C</div>
+          <p style="font-size: 0.85rem; margin: 0.5rem 0;">Condition: Extreme Thermal Convection • Humidity 21%</p>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Min: 32.4°C | Departure: +5.7°C</div>
+        </div>
+
+        <!-- City 3 -->
+        <div class="card city-card" data-risk="red">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3>Bikaner</h3>
+            <span class="badge badge-red">Red Alert</span>
+          </div>
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--red);">46.1°C</div>
+          <p style="font-size: 0.85rem; margin: 0.5rem 0;">Condition: Intense Arid Radiation • Humidity 16%</p>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Min: 33.1°C | Departure: +6.1°C</div>
+        </div>
+
+        <!-- City 4 -->
+        <div class="card city-card" data-risk="orange">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3>Ahmedabad</h3>
+            <span class="badge badge-orange">Orange Alert</span>
+          </div>
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--terracotta);">43.5°C</div>
+          <p style="font-size: 0.85rem; margin: 0.5rem 0;">Condition: Harsh Sunshine • Humidity 31%</p>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Min: 29.8°C | Departure: +4.2°C</div>
+        </div>
+
+        <!-- City 5 -->
+        <div class="card city-card" data-risk="yellow">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3>Hyderabad</h3>
+            <span class="badge badge-yellow">Yellow Watch</span>
+          </div>
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--amber);">41.2°C</div>
+          <p style="font-size: 0.85rem; margin: 0.5rem 0;">Condition: Hazy Heat • Humidity 38%</p>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Min: 28.5°C | Departure: +2.6°C</div>
+        </div>
+
+        <!-- City 6 -->
+        <div class="card city-card" data-risk="yellow">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3>Bengaluru</h3>
+            <span class="badge badge-green">Green Normal</span>
+          </div>
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--olive);">35.4°C</div>
+          <p style="font-size: 0.85rem; margin: 0.5rem 0;">Condition: Partially Clouded • Humidity 46%</p>
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Min: 23.2°C | Departure: +1.1°C</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Historical Temperature Table -->
+  <section class="py-5">
+    <div class="container">
+      <span class="mono-tag">ARCHIVAL OBSERVATIONS</span>
+      <h2>Historical Heat Spikes (IMD Benchmarks)</h2>
+      <p style="margin-bottom: 1.5rem;">Benchmark historical heat records used to calibrate regional early warning baselines.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Reference Station</th>
+              <th>Recorded Max (°C)</th>
+              <th>Normal Baseline (°C)</th>
+              <th>Departure (+Δ)</th>
+              <th>Duration</th>
+              <th>IMD Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>2024</strong></td>
+              <td>Mungeshpur, Delhi NCR</td>
+              <td><strong>49.9°C</strong></td>
+              <td>40.4°C</td>
+              <td>+9.5°C</td>
+              <td>11 Consecutive Days</td>
+              <td><span class="badge badge-red">Severe Heatwave</span></td>
+            </tr>
+            <tr>
+              <td><strong>2022</strong></td>
+              <td>Banda, Uttar Pradesh</td>
+              <td><strong>48.9°C</strong></td>
+              <td>41.2°C</td>
+              <td>+7.7°C</td>
+              <td>8 Consecutive Days</td>
+              <td><span class="badge badge-red">Severe Heatwave</span></td>
+            </tr>
+            <tr>
+              <td><strong>2019</strong></td>
+              <td>Churu, Rajasthan</td>
+              <td><strong>50.6°C</strong></td>
+              <td>42.0°C</td>
+              <td>+8.6°C</td>
+              <td>14 Consecutive Days</td>
+              <td><span class="badge badge-red">Critical Spike</span></td>
+            </tr>
+            <tr>
+              <td><strong>2016</strong></td>
+              <td>Phalodi, Rajasthan</td>
+              <td><strong>51.0°C</strong></td>
+              <td>42.5°C</td>
+              <td>+8.5°C</td>
+              <td>9 Consecutive Days</td>
+              <td><span class="badge badge-red">National Record</span></td>
+            </tr>
+            <tr>
+              <td><strong>2015</strong></td>
+              <td>Khammam, Telangana</td>
+              <td><strong>48.0°C</strong></td>
+              <td>40.8°C</td>
+              <td>+7.2°C</td>
+              <td>7 Consecutive Days</td>
+              <td><span class="badge badge-orange">Severe Event</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Navigation Step Bar -->
+      <div class="journey-bar">
+        <a href="index.html" class="journey-link">
+          <span>Previous Module</span>
+          <strong>← Home Overview</strong>
+        </a>
+        <a href="monitoring.html" class="journey-link" style="text-align: right;">
+          <span>Next Module</span>
+          <strong>Weather Station Monitoring →</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Shared Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color: #FFF; margin-bottom: 0.75rem;">AETHERIS<span>•</span></div>
+          <p style="color: #A8A199; font-size: 0.88rem; max-width: 32ch;">
+            Regional early warnings, surface micro-telemetry, and public safety protocols during extreme thermal events.
+          </p>
+        </div>
+        <div>
+          <div class="footer-title">Weather Information</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home Overview</a></li>
+            <li><a href="forecasts.html">City Forecasts</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Monitoring & Telemetry</div>
+          <ul class="footer-links">
+            <li><a href="monitoring.html">Station Telemetry</a></li>
+            <li><a href="comparison.html">Forecast Accuracy</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Safety & Community</div>
+          <ul class="footer-links">
+            <li><a href="safety.html">Safety Protocols</a></li>
+            <li><a href="emergency.html">Emergency Helplines</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-sub">
+        <div>© 2026 Aetheris Initiative • Regional Atmospheric Resilience Network</div>
+        <div style="font-family: var(--font-mono);">Public Meteorological Advisory System</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
